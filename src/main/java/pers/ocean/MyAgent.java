@@ -1,6 +1,7 @@
 package pers.ocean;
 
 import net.bytebuddy.agent.builder.AgentBuilder;
+import net.bytebuddy.description.modifier.Visibility;
 import net.bytebuddy.description.type.TypeDescription;
 import net.bytebuddy.dynamic.DynamicType;
 import net.bytebuddy.implementation.MethodDelegation;
@@ -21,6 +22,7 @@ public class MyAgent {
         System.out.println("this is an perform monitor agent.");
 
         AgentBuilder.Transformer transformer = (builder, typeDescription, classLoader, javaModule) -> builder
+                .defineField("ocean", String.class, Visibility.PUBLIC)
                 // 拦截任意方法
                 .method(ElementMatchers.any())
                 // 委托
